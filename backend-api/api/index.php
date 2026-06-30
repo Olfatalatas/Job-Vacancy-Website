@@ -8,4 +8,14 @@ if (!file_exists($compiledViewPath)) {
     mkdir($compiledViewPath, 0777, true);
 }
 
-require __DIR__ . '/../public/index.php';
+try {
+    require __DIR__ . '/../public/index.php';
+} catch (\Throwable $e) {
+    header('Content-Type: application/json');
+    echo json_encode([
+        'error_message' => $e->getMessage(),
+        'file' => $e->getFile(),
+        'line' => $e->getLine(),
+        'trace' => explode("\n", $e->getTraceAsString())
+    ]);
+}
