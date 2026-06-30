@@ -15,8 +15,5 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        $exceptions->reportable(function (\Throwable $e) {
-            header('Content-Type: text/plain');
-            die("ORIGINAL ERROR: " . $e->getMessage() . "\n\n" . $e->getTraceAsString());
-        });
+        //
     })->create();
